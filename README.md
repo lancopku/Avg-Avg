@@ -22,6 +22,7 @@ This repository implements the OOD detection algorithms developed by us (Avg-Avg
 
 ### Requirements
 Python: 3.7.9
+
 To install the dependencies, run
 <pre/>pip install -r requirements.txt</pre> 
 
@@ -33,22 +34,22 @@ For the datasets used in our papers, please download the `nlp_ood_datasets.zip` 
 #### Vanilla Training
 
 Vanilla training with cross-entroy loss:
-`
+```
 python train.py --model roberta-base --output_dir <YOUR_DIR> --seed 13 --dataset sst-2 --log_file <YOUR_LOG_FILE> --lr 2e-5 --epochs 5 --batch_size 16 
-`
+```
 
 #### Supervised Contrastive Training
 Add `--loss_type scl` or `--loss_type margin` to use the supervised contrastive auxilliray targets proposed in [Contrastive Out-of-Distribution Detection for Pretrained Transformers](https://aclanthology.org/2021.emnlp-main.84.pdf):
-`
+```
 python train.py --model roberta-base --loss scl --output_dir <YOUR_DIR> --seed 13 --dataset sst-2 --log_file <YOUR_LOG_FILE> --lr 2e-5 --epochs 5 --batch_size 16 
-`
+```
 
 #### Training with RecAdam Regularization
 
 Add '--optimizer recadam' to use the [RecAdam](https://github.com/Sanyuan-Chen/RecAdam) optimizer:
-`
+```
 python train.py --model roberta-base --optimizer recadam --output_dir <YOUR_DIR> --seed 13 --dataset sst-2 --log_file <YOUR_LOG_FILE> --lr 2e-5 --epochs 5 --batch_size 16 
-`
+```
 
 ### Evaluation for OOD Detection
 
@@ -57,44 +58,45 @@ python train.py --model roberta-base --optimizer recadam --output_dir <YOUR_DIR>
 ##### Feature Extraction
 
 Extract features from a fine-tuned model first:
-`
+```
 python extract_full_features.py --dataset sst-2 --ood_datasets 20news,trec,wmt16 --output_dir <YOUR_FT_DIR> --model roberta-base --pretrained_model <PATH_TO_FINETUNED_MODEL>
-`
+```
+
 GNOME addtional needs pre-trained features:
-`
+```
 python extract_full_features.py --dataset sst-2 --ood_datasets 20news,trec,wmt16 --output_dir <YOUR_PRE_DIR> --model roberta-base
-`
+```
 
 ##### Test
 
 **Maha** with `last-cls` pooled features:
-`
+```
 python ood_test_embedding.py --dataset sst-2 --ood_datasets 20news,trec,wmt16 --inpur_dir <YOUR_FT_DIR> --token_pooling cls --layer_pooling last
-`
+```
 
 **Avg-Avg (Ours, EMNLP 2022)**, i.e., Maha with `avg-avg` pooled features:
-`
+```
 python ood_test_embedding.py --dataset sst-2 --ood_datasets 20news,trec,wmt16 --inpur_dir <YOUR_FT_DIR> --token_pooling avg --layer_pooling avg
-`
+```
 
 **KNN** (with the pooling way that you choose, `cls-last` by default):
-`
+```
 python ood_test_embedding_knn.py --dataset sst-2 --ood_datasets 20news,trec,wmt16 --inpur_dir <YOUR_FEARTURE_DIR>  --token_pooling <cls/avg> --layer_pooling <last/avg/a list of layer indexes like 1,2,11,12>
-`
+```
 
 **GNOME (Ours, EACL 2023)** (`--std` for score normalization, `--ensemble_way mean/min` for choosing the aggregator `mean` or `min`):
-`
+```
 python ood_test_embedding_gnome.py --dataset sst-2 --ood_datasets 20news,trec,wmt16 --ft_dir <YOUR_FT_DIR>  --pre_dir <YOUR_PRE_DIR> --std --ensemble_way mean
-`
+```
 
 **Note**: Our algorithms Avg-Avg and GNOME are tested on the features extraced from the model trained with the vanilla entropy loss. For reproducing the results of [Contrastive Out-of-Distribution Detection for Pretrained Transformers](https://aclanthology.org/2021.emnlp-main.84.pdf), just use the model trained with contrastive targets to extract features.
 
 #### Other Algorithms
 
 To test MSP (base) / Energy (energy) / D2U (d2u) / ODIN (odin) / LOF (lof) / MC Dropout (mc), just specify the method by passed it to the `ood_method` argument in the `test.py`:
-`
+```
 python test.py --dataset sst-2 --ood_datasets 20news,trec,wmt16  --model roberta-base --pretraiend_model <PATH_TO_FINETUNED_MODEL> --ood_method base/energy/d2u/odin/lof/mc
-`
+```
 
 ### Citation
 
