@@ -93,7 +93,7 @@ Note: Our algorithms Avg-Avg and GNOME are tested on the features extraced from 
 
 #### Other Algorithms
 
-To test MSP (base) / Energy (energy) / D2U (d2u) / ODIN (odin) / LOF (lof) / MC Dropout (mc), just specify the method by passed it to the `ood_method` argument in the `test.py`:
+To test MSP (base) / Energy (energy) / D2U (d2u) / ODIN (odin) / LOF (lof) / MC Dropout (mc), just specify the method by passing it to the `ood_method` argument in the `test.py` script:
 ```
 python test.py --dataset sst-2 --ood_datasets 20news,trec,wmt16  --model roberta-base --pretraiend_model <PATH_TO_FINETUNED_MODEL> --ood_method base/energy/d2u/odin/lof/mc
 ```
