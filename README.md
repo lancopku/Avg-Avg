@@ -116,15 +116,19 @@ If you find this repository to be useful for your research, please consider citi
     url = "https://aclanthology.org/2022.findings-emnlp.497",
     pages = "6676--6686"
 }
-@misc{https://doi.org/10.48550/arxiv.2301.12715,
-  doi = {10.48550/ARXIV.2301.12715},
-  url = {https://arxiv.org/abs/2301.12715},
-  author = {Chen, Sishuo and Yang, Wenkai and Bi, Xiaohan and Sun, Xu},
-  keywords = {Computation and Language (cs.CL), FOS: Computer and information sciences, FOS: Computer and information sciences},
-  title = {Fine-Tuning Deteriorates General Textual Out-of-Distribution Detection by Distorting Task-Agnostic Features},
-  publisher = {arXiv},
-  year = {2023},
-  copyright = {Creative Commons Attribution 4.0 International}
+@inproceedings{chen-etal-2023-fine,
+    title = "Fine-Tuning Deteriorates General Textual Out-of-Distribution Detection by Distorting Task-Agnostic Features",
+    author = "Chen, Sishuo  and
+      Yang, Wenkai  and
+      Bi, Xiaohan  and
+      Sun, Xu",
+    booktitle = "Findings of the Association for Computational Linguistics: EACL 2023",
+    month = may,
+    year = "2023",
+    address = "Dubrovnik, Croatia",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2023.findings-eacl.41",
+    pages = "564--579"
 }
 </pre>
 
