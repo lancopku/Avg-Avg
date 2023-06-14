@@ -71,17 +71,17 @@ python extract_full_features.py --dataset sst-2 --ood_datasets 20news,trec,wmt16
 
 Maha with `last-cls` pooled features:
 ```
-python ood_test_embedding.py --dataset sst-2 --ood_datasets 20news,trec,wmt16 --inpur_dir <YOUR_FT_DIR> --token_pooling cls --layer_pooling last
+python ood_test_embedding.py --dataset sst-2 --ood_datasets 20news,trec,wmt16 --input_dir <YOUR_FT_DIR> --token_pooling cls --layer_pooling last
 ```
 
 Avg-Avg (Ours, EMNLP 2022), i.e., Maha with `avg-avg` pooled features:
 ```
-python ood_test_embedding.py --dataset sst-2 --ood_datasets 20news,trec,wmt16 --inpur_dir <YOUR_FT_DIR> --token_pooling avg --layer_pooling avg
+python ood_test_embedding.py --dataset sst-2 --ood_datasets 20news,trec,wmt16 --input_dir <YOUR_FT_DIR> --token_pooling avg --layer_pooling avg
 ```
 
 KNN (with the pooling way that you choose, `cls-last` by default):
 ```
-python ood_test_embedding_knn.py --dataset sst-2 --ood_datasets 20news,trec,wmt16 --inpur_dir <YOUR_FEARTURE_DIR>  --token_pooling <cls/avg> --layer_pooling <last/avg/a list of layer indexes like 1,2,11,12>
+python ood_test_embedding_knn.py --dataset sst-2 --ood_datasets 20news,trec,wmt16 --input_dir <YOUR_FEARTURE_DIR>  --token_pooling <cls/avg> --layer_pooling <last/avg/a list of layer indexes like 1,2,11,12>
 ```
 
 GNOME (Ours, EACL 2023) (`--std` for score normalization, `--ensemble_way mean/min` for choosing the aggregator `mean` or `min`):
@@ -95,7 +95,7 @@ Note: Our algorithms Avg-Avg and GNOME are tested on the features extraced from 
 
 To test MSP (base) / Energy (energy) / D2U (d2u) / ODIN (odin) / LOF (lof) / MC Dropout (mc), just specify the method by passing it to the `ood_method` argument in the `test.py` script:
 ```
-python test.py --dataset sst-2 --ood_datasets 20news,trec,wmt16  --model roberta-base --pretraiend_model <PATH_TO_FINETUNED_MODEL> --ood_method base/energy/d2u/odin/lof/mc
+python test.py --dataset sst-2 --ood_datasets 20news,trec,wmt16  --model roberta-base --pretrained_model <PATH_TO_FINETUNED_MODEL> --ood_method base/energy/d2u/odin/lof/mc
 ```
 
 ### Citation
